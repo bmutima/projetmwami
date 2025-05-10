@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      
+      <a class="nav-link btn btn-success create-new-button" style="width: 30%;" href="{% url 'ajouterProduit' %}">+ Ajouter une produit</a>
+      <br>
+      <h4 class="card-title">GESTION DES CATEGORIES</h4>
+      </p>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> CODE </th>
+              <th> DESIGNATION</th>
+              <th> PRIX UNITAIRE</th>
+              <th> QUANTITE</th>
+              <th> CATAGORIE</th>
+              <th> ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for p in pr %} 
+            <tr>
+              <td class="py-1"> {{p.codeprod}}</td>
+              <td> {{p.libprod}}</td>
+              <td class="py-1"> {{p.pu}}</td>
+              <td> {{p.qte}}</td>
+              <td class="py-1"> {{p.categorie}}</td>
+              <td>
+                  <a href="{% url 'deleteProduit' p.codeprod %}" onclick="return confirm('Etes-vous sur de vouloir supprimer?')"><i class="mdi mdi-delete"></i></a>
+                  <a href="{% url 'modifierProduit' p.codeprod %}"><i class="mdi mdi-table-edit"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+      {% if pr.has_previous %}
+            <a href="?page=1">&laquo;</a>
+            <a href="?page={{ pr.previous_page_number}}"><span class= "badge badge-info">Precedent</span></a>
+      {% endif %}
+            page {{ pr.number}} sur {{ pr.paginator.num_pages }}
+            <span class="badge badge-info pull-right">{{compte}}</span>
+            
+            {% if pr.has_next %}
+              <a href="?page={{ pr.next_page_number}}"><span class=" badge badge-info ">Suivant</span></a>
+              <a href="?page={{compte}}">&raquo;</a> 
+            {% else %}
+            {% endif %}    
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

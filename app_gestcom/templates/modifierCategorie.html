@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Modification de la categorie {{c.libelle}} </h4>
+        <form class="forms-sample" method="post" action="{% url 'updateCategorie' c.codecat %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputName1">CODE</label>
+            <input type="text" class="form-control" disabled id="code" placeholder="saisir le code" value="{{c.codecat}}" name="code">
+          </div>
+         
+          <div class="form-group">
+            <label for="exampleInputName1">LIBELLE</label>
+            <input type="text" class="form-control" id="libelle" name="libelle" value="{{c.libcat}}" placeholder="saisir libelle">
+          </div>
+          
+            
+          <button type="submit" class="btn btn-primary mr-2">Enregistre les modifications</button>
+          <a class="btn btn-dark"href="{% url 'categorie' %}">Retour</a>
+          <br><br>
+          {{message}}
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Input size</h4>
+        <p class="card-description"> Add classes like <code>.form-control-lg</code> and <code>.form-control-sm</code>. </p>
+        <div class="form-group">
+          <label>Large input</label>
+          <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username">
+        </div>
+        <div class="form-group">
+          <label>Default input</label>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+        </div>
+        <div class="form-group">
+          <label>Small input</label>
+          <input type="text" class="form-control form-control-sm" placeholder="Username" aria-label="Username">
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
